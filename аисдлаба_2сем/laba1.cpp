@@ -346,7 +346,7 @@ private:
 			root = new TreeNode(key, nullptr, nullptr);
 			return root;
 		}
-		if (key > root->data) {
+		if (key >= root->data) {
 			root->right = insert_(root->right, key);
 		}
 		if (key < root->data) {
@@ -934,318 +934,318 @@ Set<T> difference(const Set<T>& first_tree, const Set<T>& second_tree) {
 //	return sum / 1000;
 //}
 
-int main() {
-	/*//ТЕСТОВАЯ ЗОНА
-	Set<int> tt_1000, tt_10000, tt_100000;
-	vector<int> vtt_1000, vtt_10000, vtt_100000;
-
-	double vect_attempts_1000[100], vect_attempts_10000[100], vect_attempts_100000[100];
-	double set_attempts_1000[100], set_attempts_10000[100], set_attempts_100000[100];
-
-	//ЗАПОЛНЕНИЕ НА 1000
-	for (size_t i = 0; i < 100; ++i) {
-		int counter = 0;
-
-		//start
-		clock_t begin = clock();
-		while (counter != 1000) {
-			tt_1000.insert(lcg());
-			++counter;
-		}
-		clock_t end = clock();
-		//end
-
-		if (i != 99) { tt_1000.clear(); }
-		set_attempts_1000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
-	}
-	cout << "Average time to fill tree with 1000 elem: " << AVG_for_100(set_attempts_1000) << endl;
-
-	//ЗАПОЛНЕНИЕ НА 10000
-	for (size_t i = 0; i < 100; ++i) {
-		int counter = 0;
-		//start
-		clock_t begin = clock();
-		while (counter != 10000) {
-			tt_10000.insert(lcg());
-			++counter;
-		}
-		clock_t end = clock();
-		//end
-		if (i != 99) { tt_10000.clear(); }
-		set_attempts_10000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
-	}
-	cout << "Average time to fill tree with 10000 elem: " << AVG_for_100(set_attempts_10000) << endl;
-
-	//ЗАПОЛНЕНИЕ НА 100000
-	for (size_t i = 0; i < 100; ++i) {
-		int counter = 0;
-		//start
-		clock_t begin = clock();
-		while (counter != 100000) {
-			tt_100000.insert(lcg());
-			++counter;
-		}
-		clock_t end = clock();
-		//end
-		if (i != 99) { tt_100000.clear(); }
-		set_attempts_100000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
-	}
-	cout << "Average time to fill tree with 100000 elem: " << AVG_for_100(set_attempts_100000) << endl;
-
-	cout << "-------------------------------------------------------------------" << endl;
-
-	//ЗАПОЛНЕНИЕ std::vector НА 1000
-	for (size_t i = 0; i < 100; ++i) {
-		int counter = 0;
-		//start
-		clock_t begin = clock();
-		while (counter != 1000) {
-			vtt_1000.push_back(lcg());
-			++counter;
-		}
-		clock_t end = clock();
-		//end
-		if (i != 99) { vtt_1000.clear(); }
-		vect_attempts_1000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
-	}
-	cout << "Average time to fill vector with 1000 elem: " << AVG_for_100(vect_attempts_1000) << endl;
-
-	//ЗАПОЛНЕНИЕ std::vector НА 10000
-	for (size_t i = 0; i < 100; ++i) {
-		int counter = 0;
-		//start
-		clock_t begin = clock();
-		while (counter != 10000) {
-			vtt_10000.push_back(lcg());
-			++counter;
-		}
-		clock_t end = clock();
-		//end
-		if (i != 99) { vtt_10000.clear(); }
-		vect_attempts_10000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
-	}
-	cout << "Average time to fill vector with 10000 elem: " << AVG_for_100(vect_attempts_10000) << endl;
-
-	//ЗАПОЛНЕНИЕ std::vector НА 100000
-	for (size_t i = 0; i < 100; ++i) {
-		int counter = 0;
-		//start
-		clock_t begin = clock();
-		while (counter != 100000) {
-			vtt_100000.push_back(lcg());
-			++counter;
-		}
-		clock_t end = clock();
-		//end
-		if (i != 99) { vtt_100000.clear(); }
-		vect_attempts_100000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
-	}
-	cout << "Average time to fill vector with 100000 elem: " << AVG_for_100(vect_attempts_100000) << endl;
-
-	cout << "-------------------------------------------------------------------" << endl;
-
-	double findattempts_1000[1000], findattempts_10000[1000], findattempts_100000[1000];
-	//ПОИСК ЭЛЕМЕНТА В ДЕРЕВЕ 1000
-	for (size_t i = 0; i < 1000; ++i) {
-		//start
-		clock_t begin = clock();
-		tt_1000.contains(lcg());
-		clock_t end = clock();
-		//end
-
-		findattempts_1000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
-	}
-	cout << "Average time to find elem in tree with 1000 elem: " << AVG_for_1000(findattempts_1000) << endl;
-
-	//ПОИСК ЭЛЕМЕНТА В ДЕРЕВЕ 10000
-	for (size_t i = 0; i < 1000; ++i) {
-		//start
-		clock_t begin = clock();
-		tt_10000.contains(lcg());
-		clock_t end = clock();
-		//end
-
-		findattempts_10000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
-	}
-	cout << "Average time to find elem in tree with 10000 elem: " << AVG_for_1000(findattempts_10000) << endl;
-
-	//ПОИСК ЭЛЕМЕНТА В ДЕРЕВЕ 100000
-	for (size_t i = 0; i < 1000; ++i) {
-		//start
-		clock_t begin = clock();
-		tt_100000.contains(lcg());
-		clock_t end = clock();
-		//end
-
-		findattempts_100000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
-	}
-	cout << "Average time to find elem in tree with 100000 elem: " << AVG_for_1000(findattempts_100000) << endl;
-
-	cout << "-------------------------------------------------------------------" << endl;
-
-	double vfindattempts_1000[1000], vfindattempts_10000[1000], vfindattempts_100000[1000];
-	//ПОИСК ЭЛЕМЕНТА В ВЕКТОРЕ 1000
-	for (size_t i = 0; i < 1000; ++i) {
-		int elem = lcg();
-		//start
-		clock_t begin = clock();
-		for (size_t i = 0; i < vtt_1000.size(); ++i) {
-			if (vtt_1000[i] == elem) { break; }
-		}
-		clock_t end = clock();
-		//end
-
-		vfindattempts_1000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
-	}
-	cout << "Average time to find elem in std::vector with 1000 elem: " << AVG_for_1000(vfindattempts_1000) << endl;
-
-	//ПОИСК ЭЛЕМЕНТА В ВЕКТОРЕ 10000
-	for (size_t i = 0; i < 1000; ++i) {
-		int elem = lcg();
-		//start
-		clock_t begin = clock();
-		for (size_t i = 0; i < vtt_10000.size(); ++i) {
-			if (vtt_10000[i] == elem) { break; }
-		}
-		clock_t end = clock();
-		//end
-
-		vfindattempts_10000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
-	}
-	cout << "Average time to find elem in std::vector with 10000 elem: " << AVG_for_1000(vfindattempts_10000) << endl;
-
-	//ПОИСК ЭЛЕМЕНТА В ВЕКТОРЕ 100000
-	for (size_t i = 0; i < 1000; ++i) {
-		int elem = lcg();
-		//start
-		clock_t begin = clock();
-		for (size_t i = 0; i < vtt_100000.size(); ++i) {
-			if (vtt_100000[i] == elem) { break; }
-		}
-		clock_t end = clock();
-		//end
-
-		vfindattempts_100000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
-	}
-	cout << "Average time to find elem in std::vector with 100000 elem: " << AVG_for_1000(vfindattempts_100000) << endl;
-
-	cout << "-------------------------------------------------------------------" << endl;
-
-	double add_del_attempts_1000[1000], add_del_attempts_10000[1000], add_del_attempts_100000[1000];
-	//ДОБАВЛЕНИЕ И УДАЛЕНИЕ В ДЕРЕВЕ 1000
-	for (size_t i = 0; i < 1000; ++i) {
-		int elem = lcg();
-		//start
-		clock_t begin = clock();
-		tt_1000.insert(elem);
-		tt_1000.erase(elem);
-		clock_t end = clock();
-		//end
-
-		add_del_attempts_1000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
-	}
-	cout << "Average time to add and delete elem in set with 1000 elem: " << AVG_for_1000(add_del_attempts_1000) << endl;
-
-	//ДОБАВЛЕНИЕ И УДАЛЕНИЕ В ДЕРЕВЕ 10000
-	for (size_t i = 0; i < 1000; ++i) {
-		int elem = lcg();
-		//start
-		clock_t begin = clock();
-		tt_10000.insert(elem);
-		tt_10000.erase(elem);
-		clock_t end = clock();
-		//end
-
-		add_del_attempts_10000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
-	}
-	cout << "Average time to add and delete elem in set with 10000 elem: " << AVG_for_1000(add_del_attempts_10000) << endl;
-
-	//ДОБАВЛЕНИЕ И УДАЛЕНИЕ В ДЕРЕВЕ 100000
-	for (size_t i = 0; i < 1000; ++i) {
-		int elem = lcg();
-		//start
-		clock_t begin = clock();
-		tt_100000.insert(elem);
-		tt_100000.erase(elem);
-		clock_t end = clock();
-		//end
-
-		add_del_attempts_100000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
-	}
-	cout << "Average time to add and delete elem in set with 100000 elem: " << AVG_for_1000(add_del_attempts_100000) << endl;
-
-	cout << "-------------------------------------------------------------------" << endl;
-
-	double add_del_vecattempts_1000[1000], add_del_vecattempts_10000[1000], add_del_vecattempts_100000[1000];
-	//ДОБАВЛЕНИЕ И УДАЛЕНИЕ В VECTOR 1000
-	for (size_t i = 0; i < 1000; ++i) {
-		int elem = lcg();
-		//start
-		clock_t begin = clock();
-		vtt_1000.push_back(elem);
-		vtt_1000.pop_back();
-		clock_t end = clock();
-		//end
-
-		add_del_vecattempts_1000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
-	}
-	cout << "Average time to find elem in std::vector with 1000 elem: " << AVG_for_1000(add_del_vecattempts_1000) << endl;
-
-	//ДОБАВЛЕНИЕ И УДАЛЕНИЕ В VECTOR 10000
-	for (size_t i = 0; i < 1000; ++i) {
-		int elem = lcg();
-		//start
-		clock_t begin = clock();
-		vtt_10000.push_back(elem);
-		vtt_10000.pop_back();
-		clock_t end = clock();
-		//end
-
-		add_del_vecattempts_10000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
-	}
-	cout << "Average time to find elem in std::vector with 10000 elem: " << AVG_for_1000(add_del_vecattempts_10000) << endl;
-
-	//ДОБАВЛЕНИЕ И УДАЛЕНИЕ В VECTOR 100000
-	for (size_t i = 0; i < 1000; ++i) {
-		int elem = lcg();
-		//start
-		clock_t begin = clock();
-		vtt_100000.push_back(elem);
-		vtt_100000.pop_back();
-		clock_t end = clock();
-		//end
-
-		add_del_vecattempts_100000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
-	}
-	cout << "Average time to find elem in std::vector with 100000 elem: " << AVG_for_1000(add_del_vecattempts_100000) << endl;*/
-
-	Set<int> a;
-	a.insert(10);
-	a.insert(1);
-	a.insert(19);
-	a.print_tree();
-	cout << endl;
-	a.insert(13);
-	a.print_tree();
-	cout << endl;
-	a.insert(20);
-	a.print_tree();
-	cout << endl;
-	a.insert(3);
-	a.print_tree();
-	cout << endl;
-	a.insert(9);
-	a.print_tree();
-	cout << endl;
-	a.insert(12);
-	a.print_tree();
-	cout << endl;
-	a.insert(2);
-	a.print_tree();
-	cout << endl;
-	a.insert(11);
-	a.print_tree();
-	cout << endl;
-	a.insert(14);
-	a.print_tree();
-}
+//int main() {
+//	/*//ТЕСТОВАЯ ЗОНА
+//	Set<int> tt_1000, tt_10000, tt_100000;
+//	vector<int> vtt_1000, vtt_10000, vtt_100000;
+//
+//	double vect_attempts_1000[100], vect_attempts_10000[100], vect_attempts_100000[100];
+//	double set_attempts_1000[100], set_attempts_10000[100], set_attempts_100000[100];
+//
+//	//ЗАПОЛНЕНИЕ НА 1000
+//	for (size_t i = 0; i < 100; ++i) {
+//		int counter = 0;
+//
+//		//start
+//		clock_t begin = clock();
+//		while (counter != 1000) {
+//			tt_1000.insert(lcg());
+//			++counter;
+//		}
+//		clock_t end = clock();
+//		//end
+//
+//		if (i != 99) { tt_1000.clear(); }
+//		set_attempts_1000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
+//	}
+//	cout << "Average time to fill tree with 1000 elem: " << AVG_for_100(set_attempts_1000) << endl;
+//
+//	//ЗАПОЛНЕНИЕ НА 10000
+//	for (size_t i = 0; i < 100; ++i) {
+//		int counter = 0;
+//		//start
+//		clock_t begin = clock();
+//		while (counter != 10000) {
+//			tt_10000.insert(lcg());
+//			++counter;
+//		}
+//		clock_t end = clock();
+//		//end
+//		if (i != 99) { tt_10000.clear(); }
+//		set_attempts_10000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
+//	}
+//	cout << "Average time to fill tree with 10000 elem: " << AVG_for_100(set_attempts_10000) << endl;
+//
+//	//ЗАПОЛНЕНИЕ НА 100000
+//	for (size_t i = 0; i < 100; ++i) {
+//		int counter = 0;
+//		//start
+//		clock_t begin = clock();
+//		while (counter != 100000) {
+//			tt_100000.insert(lcg());
+//			++counter;
+//		}
+//		clock_t end = clock();
+//		//end
+//		if (i != 99) { tt_100000.clear(); }
+//		set_attempts_100000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
+//	}
+//	cout << "Average time to fill tree with 100000 elem: " << AVG_for_100(set_attempts_100000) << endl;
+//
+//	cout << "-------------------------------------------------------------------" << endl;
+//
+//	//ЗАПОЛНЕНИЕ std::vector НА 1000
+//	for (size_t i = 0; i < 100; ++i) {
+//		int counter = 0;
+//		//start
+//		clock_t begin = clock();
+//		while (counter != 1000) {
+//			vtt_1000.push_back(lcg());
+//			++counter;
+//		}
+//		clock_t end = clock();
+//		//end
+//		if (i != 99) { vtt_1000.clear(); }
+//		vect_attempts_1000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
+//	}
+//	cout << "Average time to fill vector with 1000 elem: " << AVG_for_100(vect_attempts_1000) << endl;
+//
+//	//ЗАПОЛНЕНИЕ std::vector НА 10000
+//	for (size_t i = 0; i < 100; ++i) {
+//		int counter = 0;
+//		//start
+//		clock_t begin = clock();
+//		while (counter != 10000) {
+//			vtt_10000.push_back(lcg());
+//			++counter;
+//		}
+//		clock_t end = clock();
+//		//end
+//		if (i != 99) { vtt_10000.clear(); }
+//		vect_attempts_10000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
+//	}
+//	cout << "Average time to fill vector with 10000 elem: " << AVG_for_100(vect_attempts_10000) << endl;
+//
+//	//ЗАПОЛНЕНИЕ std::vector НА 100000
+//	for (size_t i = 0; i < 100; ++i) {
+//		int counter = 0;
+//		//start
+//		clock_t begin = clock();
+//		while (counter != 100000) {
+//			vtt_100000.push_back(lcg());
+//			++counter;
+//		}
+//		clock_t end = clock();
+//		//end
+//		if (i != 99) { vtt_100000.clear(); }
+//		vect_attempts_100000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
+//	}
+//	cout << "Average time to fill vector with 100000 elem: " << AVG_for_100(vect_attempts_100000) << endl;
+//
+//	cout << "-------------------------------------------------------------------" << endl;
+//
+//	double findattempts_1000[1000], findattempts_10000[1000], findattempts_100000[1000];
+//	//ПОИСК ЭЛЕМЕНТА В ДЕРЕВЕ 1000
+//	for (size_t i = 0; i < 1000; ++i) {
+//		//start
+//		clock_t begin = clock();
+//		tt_1000.contains(lcg());
+//		clock_t end = clock();
+//		//end
+//
+//		findattempts_1000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
+//	}
+//	cout << "Average time to find elem in tree with 1000 elem: " << AVG_for_1000(findattempts_1000) << endl;
+//
+//	//ПОИСК ЭЛЕМЕНТА В ДЕРЕВЕ 10000
+//	for (size_t i = 0; i < 1000; ++i) {
+//		//start
+//		clock_t begin = clock();
+//		tt_10000.contains(lcg());
+//		clock_t end = clock();
+//		//end
+//
+//		findattempts_10000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
+//	}
+//	cout << "Average time to find elem in tree with 10000 elem: " << AVG_for_1000(findattempts_10000) << endl;
+//
+//	//ПОИСК ЭЛЕМЕНТА В ДЕРЕВЕ 100000
+//	for (size_t i = 0; i < 1000; ++i) {
+//		//start
+//		clock_t begin = clock();
+//		tt_100000.contains(lcg());
+//		clock_t end = clock();
+//		//end
+//
+//		findattempts_100000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
+//	}
+//	cout << "Average time to find elem in tree with 100000 elem: " << AVG_for_1000(findattempts_100000) << endl;
+//
+//	cout << "-------------------------------------------------------------------" << endl;
+//
+//	double vfindattempts_1000[1000], vfindattempts_10000[1000], vfindattempts_100000[1000];
+//	//ПОИСК ЭЛЕМЕНТА В ВЕКТОРЕ 1000
+//	for (size_t i = 0; i < 1000; ++i) {
+//		int elem = lcg();
+//		//start
+//		clock_t begin = clock();
+//		for (size_t i = 0; i < vtt_1000.size(); ++i) {
+//			if (vtt_1000[i] == elem) { break; }
+//		}
+//		clock_t end = clock();
+//		//end
+//
+//		vfindattempts_1000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
+//	}
+//	cout << "Average time to find elem in std::vector with 1000 elem: " << AVG_for_1000(vfindattempts_1000) << endl;
+//
+//	//ПОИСК ЭЛЕМЕНТА В ВЕКТОРЕ 10000
+//	for (size_t i = 0; i < 1000; ++i) {
+//		int elem = lcg();
+//		//start
+//		clock_t begin = clock();
+//		for (size_t i = 0; i < vtt_10000.size(); ++i) {
+//			if (vtt_10000[i] == elem) { break; }
+//		}
+//		clock_t end = clock();
+//		//end
+//
+//		vfindattempts_10000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
+//	}
+//	cout << "Average time to find elem in std::vector with 10000 elem: " << AVG_for_1000(vfindattempts_10000) << endl;
+//
+//	//ПОИСК ЭЛЕМЕНТА В ВЕКТОРЕ 100000
+//	for (size_t i = 0; i < 1000; ++i) {
+//		int elem = lcg();
+//		//start
+//		clock_t begin = clock();
+//		for (size_t i = 0; i < vtt_100000.size(); ++i) {
+//			if (vtt_100000[i] == elem) { break; }
+//		}
+//		clock_t end = clock();
+//		//end
+//
+//		vfindattempts_100000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
+//	}
+//	cout << "Average time to find elem in std::vector with 100000 elem: " << AVG_for_1000(vfindattempts_100000) << endl;
+//
+//	cout << "-------------------------------------------------------------------" << endl;
+//
+//	double add_del_attempts_1000[1000], add_del_attempts_10000[1000], add_del_attempts_100000[1000];
+//	//ДОБАВЛЕНИЕ И УДАЛЕНИЕ В ДЕРЕВЕ 1000
+//	for (size_t i = 0; i < 1000; ++i) {
+//		int elem = lcg();
+//		//start
+//		clock_t begin = clock();
+//		tt_1000.insert(elem);
+//		tt_1000.erase(elem);
+//		clock_t end = clock();
+//		//end
+//
+//		add_del_attempts_1000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
+//	}
+//	cout << "Average time to add and delete elem in set with 1000 elem: " << AVG_for_1000(add_del_attempts_1000) << endl;
+//
+//	//ДОБАВЛЕНИЕ И УДАЛЕНИЕ В ДЕРЕВЕ 10000
+//	for (size_t i = 0; i < 1000; ++i) {
+//		int elem = lcg();
+//		//start
+//		clock_t begin = clock();
+//		tt_10000.insert(elem);
+//		tt_10000.erase(elem);
+//		clock_t end = clock();
+//		//end
+//
+//		add_del_attempts_10000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
+//	}
+//	cout << "Average time to add and delete elem in set with 10000 elem: " << AVG_for_1000(add_del_attempts_10000) << endl;
+//
+//	//ДОБАВЛЕНИЕ И УДАЛЕНИЕ В ДЕРЕВЕ 100000
+//	for (size_t i = 0; i < 1000; ++i) {
+//		int elem = lcg();
+//		//start
+//		clock_t begin = clock();
+//		tt_100000.insert(elem);
+//		tt_100000.erase(elem);
+//		clock_t end = clock();
+//		//end
+//
+//		add_del_attempts_100000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
+//	}
+//	cout << "Average time to add and delete elem in set with 100000 elem: " << AVG_for_1000(add_del_attempts_100000) << endl;
+//
+//	cout << "-------------------------------------------------------------------" << endl;
+//
+//	double add_del_vecattempts_1000[1000], add_del_vecattempts_10000[1000], add_del_vecattempts_100000[1000];
+//	//ДОБАВЛЕНИЕ И УДАЛЕНИЕ В VECTOR 1000
+//	for (size_t i = 0; i < 1000; ++i) {
+//		int elem = lcg();
+//		//start
+//		clock_t begin = clock();
+//		vtt_1000.push_back(elem);
+//		vtt_1000.pop_back();
+//		clock_t end = clock();
+//		//end
+//
+//		add_del_vecattempts_1000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
+//	}
+//	cout << "Average time to find elem in std::vector with 1000 elem: " << AVG_for_1000(add_del_vecattempts_1000) << endl;
+//
+//	//ДОБАВЛЕНИЕ И УДАЛЕНИЕ В VECTOR 10000
+//	for (size_t i = 0; i < 1000; ++i) {
+//		int elem = lcg();
+//		//start
+//		clock_t begin = clock();
+//		vtt_10000.push_back(elem);
+//		vtt_10000.pop_back();
+//		clock_t end = clock();
+//		//end
+//
+//		add_del_vecattempts_10000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
+//	}
+//	cout << "Average time to find elem in std::vector with 10000 elem: " << AVG_for_1000(add_del_vecattempts_10000) << endl;
+//
+//	//ДОБАВЛЕНИЕ И УДАЛЕНИЕ В VECTOR 100000
+//	for (size_t i = 0; i < 1000; ++i) {
+//		int elem = lcg();
+//		//start
+//		clock_t begin = clock();
+//		vtt_100000.push_back(elem);
+//		vtt_100000.pop_back();
+//		clock_t end = clock();
+//		//end
+//
+//		add_del_vecattempts_100000[i] = double(end - begin) / double(CLOCKS_PER_SEC);
+//	}
+//	cout << "Average time to find elem in std::vector with 100000 elem: " << AVG_for_1000(add_del_vecattempts_100000) << endl;*/
+//
+//	Set<int> a;
+//	a.insert(10);
+//	a.insert(1);
+//	a.insert(19);
+//	a.print_tree();
+//	cout << endl;
+//	a.insert(13);
+//	a.print_tree();
+//	cout << endl;
+//	a.insert(20);
+//	a.print_tree();
+//	cout << endl;
+//	a.insert(3);
+//	a.print_tree();
+//	cout << endl;
+//	a.insert(9);
+//	a.print_tree();
+//	cout << endl;
+//	a.insert(12);
+//	a.print_tree();
+//	cout << endl;
+//	a.insert(2);
+//	a.print_tree();
+//	cout << endl;
+//	a.insert(11);
+//	a.print_tree();
+//	cout << endl;
+//	a.insert(14);
+//	a.print_tree();
+//}
